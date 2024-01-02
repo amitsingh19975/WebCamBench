@@ -12,7 +12,7 @@ import SwiftData
 struct WebCamBenchApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+//            DeviceInfo.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -22,10 +22,13 @@ struct WebCamBenchApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    private let viewModel = CameraDeviceModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(viewModel)
         }
         .modelContainer(sharedModelContainer)
     }

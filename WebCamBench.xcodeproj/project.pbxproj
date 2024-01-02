@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		2818E98E2B43F72F005CF640 /* WebCamBenchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E98D2B43F72F005CF640 /* WebCamBenchApp.swift */; };
 		2818E9902B43F72F005CF640 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E98F2B43F72F005CF640 /* ContentView.swift */; };
-		2818E9922B43F72F005CF640 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9912B43F72F005CF640 /* Item.swift */; };
 		2818E9942B43F731005CF640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2818E9932B43F731005CF640 /* Assets.xcassets */; };
 		2818E9972B43F731005CF640 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2818E9962B43F731005CF640 /* Preview Assets.xcassets */; };
 		2818E9A22B43F731005CF640 /* WebCamBenchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9A12B43F731005CF640 /* WebCamBenchTests.swift */; };
 		2818E9AC2B43F731005CF640 /* WebCamBenchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9AB2B43F731005CF640 /* WebCamBenchUITests.swift */; };
 		2818E9AE2B43F731005CF640 /* WebCamBenchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9AD2B43F731005CF640 /* WebCamBenchUITestsLaunchTests.swift */; };
+		2818E9BC2B43F7CE005CF640 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9BB2B43F7CE005CF640 /* DeviceInfo.swift */; };
+		2818E9BE2B43FA87005CF640 /* CameraDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9BD2B43FA87005CF640 /* CameraDeviceModel.swift */; };
+		2818E9C02B440BD4005CF640 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E9BF2B440BD4005CF640 /* Benchmark.swift */; };
+		28D2014A2B44426800940E9F /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D201492B44426800940E9F /* DeviceView.swift */; };
+		28D2014C2B44496B00940E9F /* DeviceLableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D2014B2B44496B00940E9F /* DeviceLableView.swift */; };
+		28D2014E2B444A6F00940E9F /* DeviceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D2014D2B444A6F00940E9F /* DeviceContentView.swift */; };
+		28D201512B44578D00940E9F /* DeviceMetricLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D201502B44578D00940E9F /* DeviceMetricLabelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,6 @@
 		2818E98A2B43F72F005CF640 /* WebCamBench.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCamBench.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2818E98D2B43F72F005CF640 /* WebCamBenchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamBenchApp.swift; sourceTree = "<group>"; };
 		2818E98F2B43F72F005CF640 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		2818E9912B43F72F005CF640 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2818E9932B43F731005CF640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2818E9962B43F731005CF640 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2818E9982B43F731005CF640 /* WebCamBench.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebCamBench.entitlements; sourceTree = "<group>"; };
@@ -47,6 +52,13 @@
 		2818E9A72B43F731005CF640 /* WebCamBenchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebCamBenchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2818E9AB2B43F731005CF640 /* WebCamBenchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamBenchUITests.swift; sourceTree = "<group>"; };
 		2818E9AD2B43F731005CF640 /* WebCamBenchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamBenchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2818E9BB2B43F7CE005CF640 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		2818E9BD2B43FA87005CF640 /* CameraDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDeviceModel.swift; sourceTree = "<group>"; };
+		2818E9BF2B440BD4005CF640 /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
+		28D201492B44426800940E9F /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
+		28D2014B2B44496B00940E9F /* DeviceLableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLableView.swift; sourceTree = "<group>"; };
+		28D2014D2B444A6F00940E9F /* DeviceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceContentView.swift; sourceTree = "<group>"; };
+		28D201502B44578D00940E9F /* DeviceMetricLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMetricLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +109,14 @@
 		2818E98C2B43F72F005CF640 /* WebCamBench */ = {
 			isa = PBXGroup;
 			children = (
+				28D201482B44425900940E9F /* Views */,
+				2818E9BA2B43F7AC005CF640 /* Model */,
 				2818E98D2B43F72F005CF640 /* WebCamBenchApp.swift */,
 				2818E98F2B43F72F005CF640 /* ContentView.swift */,
-				2818E9912B43F72F005CF640 /* Item.swift */,
 				2818E9932B43F731005CF640 /* Assets.xcassets */,
 				2818E9982B43F731005CF640 /* WebCamBench.entitlements */,
 				2818E9952B43F731005CF640 /* Preview Content */,
+				2818E9BF2B440BD4005CF640 /* Benchmark.swift */,
 			);
 			path = WebCamBench;
 			sourceTree = "<group>";
@@ -130,6 +144,26 @@
 				2818E9AD2B43F731005CF640 /* WebCamBenchUITestsLaunchTests.swift */,
 			);
 			path = WebCamBenchUITests;
+			sourceTree = "<group>";
+		};
+		2818E9BA2B43F7AC005CF640 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2818E9BB2B43F7CE005CF640 /* DeviceInfo.swift */,
+				2818E9BD2B43FA87005CF640 /* CameraDeviceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		28D201482B44425900940E9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28D201492B44426800940E9F /* DeviceView.swift */,
+				28D2014B2B44496B00940E9F /* DeviceLableView.swift */,
+				28D2014D2B444A6F00940E9F /* DeviceContentView.swift */,
+				28D201502B44578D00940E9F /* DeviceMetricLabelView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +296,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D2014E2B444A6F00940E9F /* DeviceContentView.swift in Sources */,
+				28D201512B44578D00940E9F /* DeviceMetricLabelView.swift in Sources */,
 				2818E9902B43F72F005CF640 /* ContentView.swift in Sources */,
-				2818E9922B43F72F005CF640 /* Item.swift in Sources */,
+				2818E9C02B440BD4005CF640 /* Benchmark.swift in Sources */,
+				28D2014A2B44426800940E9F /* DeviceView.swift in Sources */,
 				2818E98E2B43F72F005CF640 /* WebCamBenchApp.swift in Sources */,
+				2818E9BE2B43FA87005CF640 /* CameraDeviceModel.swift in Sources */,
+				2818E9BC2B43F7CE005CF640 /* DeviceInfo.swift in Sources */,
+				28D2014C2B44496B00940E9F /* DeviceLableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +473,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WebCamBench;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for benchmarking; without this, the app will not work correctly.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -461,6 +504,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WebCamBench;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for benchmarking; without this, the app will not work correctly.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
