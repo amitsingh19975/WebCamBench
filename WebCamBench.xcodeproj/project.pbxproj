@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2807729C2B44845100BC3028 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807729B2B44845100BC3028 /* Utils.swift */; };
 		2818E98E2B43F72F005CF640 /* WebCamBenchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E98D2B43F72F005CF640 /* WebCamBenchApp.swift */; };
 		2818E9902B43F72F005CF640 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2818E98F2B43F72F005CF640 /* ContentView.swift */; };
 		2818E9942B43F731005CF640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2818E9932B43F731005CF640 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2807729B2B44845100BC3028 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2818E98A2B43F72F005CF640 /* WebCamBench.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCamBench.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2818E98D2B43F72F005CF640 /* WebCamBenchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamBenchApp.swift; sourceTree = "<group>"; };
 		2818E98F2B43F72F005CF640 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				2818E9982B43F731005CF640 /* WebCamBench.entitlements */,
 				2818E9952B43F731005CF640 /* Preview Content */,
 				2818E9BF2B440BD4005CF640 /* Benchmark.swift */,
+				2807729B2B44845100BC3028 /* Utils.swift */,
 			);
 			path = WebCamBench;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				2818E9902B43F72F005CF640 /* ContentView.swift in Sources */,
 				2818E9C02B440BD4005CF640 /* Benchmark.swift in Sources */,
 				28D2014A2B44426800940E9F /* DeviceView.swift in Sources */,
+				2807729C2B44845100BC3028 /* Utils.swift in Sources */,
 				2818E98E2B43F72F005CF640 /* WebCamBenchApp.swift in Sources */,
 				2818E9BE2B43FA87005CF640 /* CameraDeviceModel.swift in Sources */,
 				2818E9BC2B43F7CE005CF640 /* DeviceInfo.swift in Sources */,

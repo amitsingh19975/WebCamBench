@@ -13,12 +13,25 @@ import SwiftUI
 @Observable
 final class CameraDeviceModel {
     var devices: [AVCaptureDevice] = []
-    var currentSelectedDevice: AVCaptureDevice?
+    private var _currentSelectedDevice: AVCaptureDevice?
     var error: String?
     var benchmark: Benchmark?
     var totalSamples: Int64 = 0
     var fps: Double = 0
     var isBenchmarkRunning = false
+    
+    var currentSelectedDevice: AVCaptureDevice? {
+        get {
+            _currentSelectedDevice
+        }
+        set(v) {
+            DispatchQueue.main.async {
+                self.benchmark?.stopSession()
+                self.benchmark = nil
+                self._currentSelectedDevice = v
+            }
+        }
+    }
     
     init() {
         observeCameraSessionRunningState()

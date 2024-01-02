@@ -32,7 +32,6 @@ struct ContentView: View {
             }
             Button {
                 DispatchQueue.main.async {
-                    viewModel.benchmark?.stopSession()
                     viewModel.currentSelectedDevice = nil
                 }
             } label: {

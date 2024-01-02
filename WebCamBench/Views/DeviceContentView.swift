@@ -53,7 +53,7 @@ struct DeviceContentView: View {
                 }
                 HStack(alignment: .center, spacing: 2) {
                     Spacer()
-                    DeviceMetricLabelView(title: "Total Samples Taken", value: "\(viewModel.totalSamples)")
+                    DeviceMetricLabelView(title: "Total Samples Taken", value: viewModel.totalSamples.roundedWithAbbreviations)
                     Spacer()
                     DeviceMetricLabelView(title: "Average FPS", value: String(format: "%.2f", viewModel.fps))
                     Spacer()
