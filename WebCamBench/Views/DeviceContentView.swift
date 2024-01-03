@@ -25,17 +25,7 @@ struct DeviceContentView: View {
     
     var body: some View {
         if let device = device.wrappedValue {
-            if viewModel.isBenchmarkRunning {
-                deviceView(device)
-            } else {
-                VStack {
-                    ProgressView()
-                    Text("Please wait...")
-                }.padding(.all)
-                    .onAppear(perform: {
-                        startBenchmark(for: device)
-                    })
-            }
+            deviceView(device)
         } else {
             Text("No Device")
         }
@@ -43,46 +33,61 @@ struct DeviceContentView: View {
     
     private func deviceView(_ device: AVCaptureDevice) -> some View {
         return VStack(alignment: .center, spacing: 1) {
-            if let benchmark = viewModel.benchmark {
-                if disablePreview {
+            if disablePreview || viewModel.cameraState != .running {
+                ZStack {
                     Color(.black)
                         .padding()
-                } else {
+                    if viewModel.cameraState == .starting {
+                        VStack {
+                            ProgressView()
+                            Text("Please wait...")
+                        }.padding(.all)
+                    }
+                }
+            } else {
+                if let benchmark = viewModel.benchmark {
                     PlayerContainerView(captureSession: benchmark.captureSession)
                         .padding()
+                } else {
+                    Text("Unable to start benchmark")
                 }
-                HStack(alignment: .center, spacing: 2) {
-                    Spacer()
-                    DeviceMetricLabelView(title: "Total Samples Taken", value: viewModel.totalSamples.roundedWithAbbreviations)
-                    Spacer()
-                    DeviceMetricLabelView(title: "Average FPS", value: String(format: "%.2f", viewModel.fps))
-                    Spacer()
-                    VStack(spacing: 8) {
-                        Button(disablePreview ? "Enable Preview" : "Disable Preview") {
-                            disablePreview = !disablePreview
-                        }
-                        Button(viewModel.isBenchmarkRunning ? "Stop" : "Start") {
-                            if viewModel.isBenchmarkRunning {
-                                DispatchQueue.main.async {
-                                    self.viewModel.benchmark?.stopSession()
+            }
+            HStack(alignment: .center, spacing: 2) {
+                Spacer()
+                DeviceMetricLabelView(title: "Total Samples Taken", value: viewModel.totalSamples.roundedWithAbbreviations)
+                Spacer()
+                DeviceMetricLabelView(title: "Average FPS", value: String(format: "%.2f", viewModel.fps))
+                Spacer()
+                VStack(spacing: 8) {
+                    Button(disablePreview ? "Enable Preview" : "Disable Preview") {
+                        disablePreview = !disablePreview
+                    }.disabled(viewModel.cameraState != .running)
+                    Button(viewModel.cameraState == .running ? "Stop" : "Start") {
+                        if viewModel.cameraState == .running {
+                            DispatchQueue.main.async {
+                                self.viewModel.benchmark?.stopSession()
+                                if let benchmark = viewModel.benchmark {
+                                    benchmark.stopSession()
                                 }
-                            } else {
-                                DispatchQueue.main.async {
-                                    self.viewModel.fps = 0
-                                    self.viewModel.totalSamples = 0
-                                    self.viewModel.benchmark?.startSession()
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.viewModel.cameraState = .starting
+                                self.viewModel.fps = 0
+                                self.viewModel.totalSamples = 0
+                                if let benchmark = viewModel.benchmark {
+                                    benchmark.startSession()
+                                } else {
+                                    startBenchmark(for: device)
                                 }
                             }
                         }
-                    }
-                    Spacer()
+                    }.disabled(viewModel.cameraState == .starting)
                 }
                 Spacer()
-            } else {
-                Text("Unable to start benchmarking")
             }
-        }
-        .padding(.all)
+            Spacer()
+        }.padding(.all)
     }
     
     private func startBenchmark(for device: AVCaptureDevice) {

@@ -9,6 +9,9 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
+enum DeviceCameraState {
+    case idle, running, starting
+}
 
 @Observable
 final class CameraDeviceModel {
@@ -18,7 +21,7 @@ final class CameraDeviceModel {
     var benchmark: Benchmark?
     var totalSamples: Int64 = 0
     var fps: Double = 0
-    var isBenchmarkRunning = false
+    var cameraState: DeviceCameraState = .idle
     
     var currentSelectedDevice: AVCaptureDevice? {
         get {
@@ -39,11 +42,11 @@ final class CameraDeviceModel {
     
     func observeCameraSessionRunningState() {
         NotificationCenter.default.addObserver(forName: .AVCaptureSessionDidStartRunning, object: nil, queue: nil) { _ in
-            self.isBenchmarkRunning = true
+            self.cameraState = .running
         }
         
         NotificationCenter.default.addObserver(forName: .AVCaptureSessionDidStopRunning, object: nil, queue: nil) { _ in
-            self.isBenchmarkRunning = false
+            self.cameraState = .idle
         }
     }
     
