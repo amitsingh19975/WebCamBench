@@ -11,7 +11,7 @@ import AVFoundation
 
 struct DeviceView: View {
     let device: AVCaptureDevice
-    @Environment(CameraDeviceModel.self) private var viewModel
+    @EnvironmentObject private var viewModel: CameraDeviceModel
     
     var body: some View {
         NavigationLink(value: device) {
@@ -19,7 +19,9 @@ struct DeviceView: View {
                             isSelected: viewModel.currentSelectedDevice == device)
         }
         .onTapGesture {
-            viewModel.currentSelectedDevice = device
+            DispatchQueue.main.async {
+                viewModel.currentSelectedDevice = device
+            }
         }
     }
 }
@@ -28,5 +30,5 @@ struct DeviceView: View {
     let viewModel = CameraDeviceModel()
     viewModel.searchDevices()
     return DeviceView(device: viewModel.devices[0])
-        .environment(viewModel)
+        .environmentObject(viewModel)
 }

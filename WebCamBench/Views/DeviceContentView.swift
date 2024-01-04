@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DeviceContentView: View {
     private static let SAMPLE_FRAME_NUMBER: Int64 = 10
-    @State var viewModel: CameraDeviceModel
+    @ObservedObject var viewModel: CameraDeviceModel
     var device: Binding<AVCaptureDevice?>
     
     @State private var disablePreview = true
@@ -19,8 +19,6 @@ struct DeviceContentView: View {
     init(device: Binding<AVCaptureDevice?>, viewModel: CameraDeviceModel) {
         self.device = device
         self.viewModel = viewModel
-        self.viewModel.totalSamples = 0
-        self.viewModel.fps = 0
     }
     
     var body: some View {
@@ -71,10 +69,9 @@ struct DeviceContentView: View {
                                 }
                             }
                         } else {
+                            self.viewModel.reset()
                             DispatchQueue.main.async {
                                 self.viewModel.cameraState = .starting
-                                self.viewModel.fps = 0
-                                self.viewModel.totalSamples = 0
                                 if let benchmark = viewModel.benchmark {
                                     benchmark.startSession()
                                 } else {
@@ -95,9 +92,7 @@ struct DeviceContentView: View {
             self.viewModel.benchmark?.stopSession()
             do {
                 self.viewModel.benchmark = try Benchmark(device: device, sampleframes: Self.SAMPLE_FRAME_NUMBER) { fps in
-                    let oldSamples = Double(viewModel.totalSamples)
-                    viewModel.totalSamples += 1
-                    viewModel.fps = (fps + (viewModel.fps * oldSamples)) / Double(viewModel.totalSamples)
+                    viewModel.updateFps(fps)
                 }
                 self.viewModel.benchmark?.startSession()
             } catch {

@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Environment(CameraDeviceModel.self) private var viewModel
-    @Query private var devicesInfo: [DeviceInfo]
+    @EnvironmentObject private var viewModel: CameraDeviceModel
 
     var body: some View {
         NavigationSplitView {
@@ -24,7 +21,9 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        viewModel.searchDevices()
+                        DispatchQueue.main.async {
+                            viewModel.searchDevices()
+                        }
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
@@ -45,7 +44,9 @@ struct ContentView: View {
                 DeviceContentView(device: Binding(get: {
                     viewModel.currentSelectedDevice
                 }, set: { v in
-                    viewModel.currentSelectedDevice = v
+                    DispatchQueue.main.async {
+                        viewModel.currentSelectedDevice = v
+                    }
                 }), viewModel: viewModel)
             } else {
                 Text("Select an item")
@@ -53,7 +54,9 @@ struct ContentView: View {
         }.task {
             let status = await viewModel.isAuthorized
             if status {
-                viewModel.searchDevices()
+                DispatchQueue.main.async {
+                    viewModel.searchDevices()
+                }
             }
         }.alert(isPresented: Binding(get: {
             viewModel.error != nil
@@ -67,6 +70,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: DeviceInfo.self, inMemory: true)
-        .environment(CameraDeviceModel())
+        .environmentObject(CameraDeviceModel())
 }
