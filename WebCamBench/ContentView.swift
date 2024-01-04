@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
     @EnvironmentObject private var viewModel: CameraDeviceModel
 
     var body: some View {
         NavigationSplitView {
-            List {
+            List(selection: $viewModel.currentSelectedDevice) {
                 ForEach(viewModel.devices, id: \.uniqueID) { device in
                     DeviceView(device: device)
                 }
@@ -30,9 +31,7 @@ struct ContentView: View {
                 }
             }
             Button {
-                DispatchQueue.main.async {
-                    viewModel.currentSelectedDevice = nil
-                }
+                viewModel.currentSelectedDevice = nil
             } label: {
                 Label("Clear Select", systemImage: "trash")
                     .foregroundStyle(.red)
@@ -40,14 +39,9 @@ struct ContentView: View {
             .buttonStyle(.plain)
             .padding(.all)
         } detail: {
-            if viewModel.currentSelectedDevice != nil {
-                DeviceContentView(device: Binding(get: {
-                    viewModel.currentSelectedDevice
-                }, set: { v in
-                    DispatchQueue.main.async {
-                        viewModel.currentSelectedDevice = v
-                    }
-                }), viewModel: viewModel)
+            if let device = viewModel.currentSelectedDevice {
+                DeviceContentView(device: device)
+                    .environmentObject(viewModel)
             } else {
                 Text("Select an item")
             }

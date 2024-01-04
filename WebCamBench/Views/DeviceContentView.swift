@@ -11,22 +11,13 @@ import SwiftUI
 
 struct DeviceContentView: View {
     private static let SAMPLE_FRAME_NUMBER: Int64 = 10
-    @ObservedObject var viewModel: CameraDeviceModel
-    var device: Binding<AVCaptureDevice?>
+    @EnvironmentObject private var viewModel: CameraDeviceModel
+    let device: AVCaptureDevice
     
     @State private var disablePreview = true
     
-    init(device: Binding<AVCaptureDevice?>, viewModel: CameraDeviceModel) {
-        self.device = device
-        self.viewModel = viewModel
-    }
-    
     var body: some View {
-        if let device = device.wrappedValue {
-            deviceView(device)
-        } else {
-            Text("No Device")
-        }
+        deviceView(device)
     }
     
     private func deviceView(_ device: AVCaptureDevice) -> some View {
@@ -107,9 +98,6 @@ struct DeviceContentView: View {
     let viewModel = CameraDeviceModel()
     viewModel.searchDevices()
     viewModel.currentSelectedDevice = viewModel.devices[0]
-    return DeviceContentView(device: Binding(get: {
-        viewModel.currentSelectedDevice
-    }, set: { v in
-        viewModel.currentSelectedDevice = v
-    }), viewModel: viewModel)
+    return DeviceContentView(device: viewModel.currentSelectedDevice!)
+        .environmentObject(viewModel)
 }

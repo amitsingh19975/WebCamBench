@@ -16,12 +16,7 @@ struct DeviceView: View {
     var body: some View {
         NavigationLink(value: device) {
             DeviceLableView(label: device.localizedName,
-                            isSelected: viewModel.currentSelectedDevice == device)
-        }
-        .onTapGesture {
-            DispatchQueue.main.async {
-                viewModel.currentSelectedDevice = device
-            }
+                            isSelected: false)
         }
     }
 }

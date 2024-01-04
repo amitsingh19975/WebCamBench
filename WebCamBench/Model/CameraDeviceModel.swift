@@ -29,8 +29,10 @@ final class CameraDeviceModel: ObservableObject {
         }
         set(v) {
             DispatchQueue.main.async {
-                self.benchmark?.stopSession()
-                self.benchmark = nil
+                if let benchmark = self.benchmark {
+                    benchmark.stopSession()
+                    self.benchmark = nil
+                }
                 self._currentSelectedDevice = v
             }
         }
