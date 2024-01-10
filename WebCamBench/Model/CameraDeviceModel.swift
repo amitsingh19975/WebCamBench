@@ -21,7 +21,10 @@ final class CameraDeviceModel: ObservableObject {
     @Published var benchmark: Benchmark?
     @Published var totalSamples: Int64 = 0
     @Published var fps: Double = 0
+    @Published var currentFps: Double = 0
     @Published var cameraState: DeviceCameraState = .idle
+    @Published private var _format: AVCaptureDevice.Format? = nil
+    @Published var supportedResolution: Set<AVCaptureDevice.Format> = []
     
     var currentSelectedDevice: AVCaptureDevice? {
         get {
@@ -34,7 +37,35 @@ final class CameraDeviceModel: ObservableObject {
                     self.benchmark = nil
                 }
                 self._currentSelectedDevice = v
+                self.initResolutions(v)
             }
+        }
+    }
+    
+    var currentFormat: AVCaptureDevice.Format? {
+        get {
+            _format
+        }
+        set(f) {
+            if let f = f {
+                setCurrentFormat(f)
+            }
+            _format = f
+        }
+    }
+    
+    func setCurrentFormat(_ format: AVCaptureDevice.Format) {
+        guard let device = _currentSelectedDevice else {
+            _format = format
+            return
+        }
+        
+        do {
+            try device.lockForConfiguration()
+            device.activeFormat = format
+            device.unlockForConfiguration()
+        } catch {
+            self.error = "Unable to set resolution"
         }
     }
     
@@ -42,6 +73,18 @@ final class CameraDeviceModel: ObservableObject {
         DispatchQueue.main.async {
             self.observeCameraSessionRunningState()
         }
+    }
+    
+    func initResolutions(_ device: AVCaptureDevice?) {
+        guard let device = device else {
+            supportedResolution.removeAll()
+            _format = nil
+            return
+        }
+        
+        supportedResolution.formUnion(device.formats)
+        
+        _format = device.activeFormat
     }
     
     func observeCameraSessionRunningState() {
@@ -99,6 +142,7 @@ final class CameraDeviceModel: ObservableObject {
     nonisolated func reset() {
         DispatchQueue.main.async {
             self.fps = 0
+            self.currentFps = 0
             self.totalSamples = 0
         }
     }
@@ -108,6 +152,7 @@ final class CameraDeviceModel: ObservableObject {
             let oldSamples = Double(self.totalSamples)
             self.totalSamples += 1
             self.fps = (fps + (self.fps * oldSamples)) / Double(self.totalSamples)
+            self.currentFps = fps
         }
     }
 }

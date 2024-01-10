@@ -20,8 +20,36 @@ struct DeviceContentView: View {
         deviceView(device)
     }
     
+    private var resolutionView: some View {
+        HStack {
+            Text("Resoultion:")
+            Menu {
+                ForEach(Array(viewModel.supportedResolution), id: \.self) { f in
+                    Button {
+                        viewModel.currentFormat = f
+                    } label: {
+                        Text("\(f.resolution.width.description) x \(f.resolution.height.description) | \(f.mediaType)")
+                    }
+
+                }
+            } label: {
+                if let f = viewModel.currentFormat {
+                    Text("\(f.resolution.width.description) x \(f.resolution.height.description) | \(f.mediaType)")
+                } else {
+                    Text("Select a resolution")
+                }
+            }
+            .frame(maxWidth: 300)
+            .disabled(viewModel.cameraState != .idle)
+            Spacer()
+        }
+        .padding(.leading)
+    }
+    
+    
     private func deviceView(_ device: AVCaptureDevice) -> some View {
         return VStack(alignment: .center, spacing: 1) {
+            resolutionView
             if disablePreview || viewModel.cameraState != .running {
                 ZStack {
                     Color(.black)
@@ -47,10 +75,12 @@ struct DeviceContentView: View {
                 Spacer()
                 DeviceMetricLabelView(title: "Average FPS", value: String(format: "%.2f", viewModel.fps))
                 Spacer()
+                DeviceMetricLabelView(title: "FPS", value: String(format: "%.2f", viewModel.currentFps))
+                Spacer()
                 VStack(spacing: 8) {
                     Button(disablePreview ? "Enable Preview" : "Disable Preview") {
                         disablePreview = !disablePreview
-                    }.disabled(viewModel.cameraState != .running)
+                    }
                     Button(viewModel.cameraState == .running ? "Stop" : "Start") {
                         if viewModel.cameraState == .running {
                             DispatchQueue.main.async {
@@ -98,6 +128,6 @@ struct DeviceContentView: View {
     let viewModel = CameraDeviceModel()
     viewModel.searchDevices()
     viewModel.currentSelectedDevice = viewModel.devices[0]
-    return DeviceContentView(device: viewModel.currentSelectedDevice!)
+    return DeviceContentView(device: viewModel.devices[0])
         .environmentObject(viewModel)
 }

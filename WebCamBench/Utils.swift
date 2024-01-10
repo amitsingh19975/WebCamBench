@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 extension Int64 {
     var roundedWithAbbreviations: String {
@@ -19,5 +20,16 @@ extension Int64 {
         } else {
             return "\(self)"
         }
+    }
+}
+
+extension AVCaptureDevice.Format {
+    var mediaType: String {
+        let codec = formatDescription.mediaSubType
+        return codec.description.replacingOccurrences(of: "'", with: "")
+    }
+    
+    var resolution: CMVideoDimensions {
+        formatDescription.dimensions
     }
 }

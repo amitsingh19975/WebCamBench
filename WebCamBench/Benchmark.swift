@@ -97,7 +97,6 @@ final class Benchmark {
     init(device: AVCaptureDevice, sampleframes: Int64, updateFps: @escaping (Double) -> Void) throws {
         self.device = device
         self.delegate = BenchmarkDelegate(sampleframes: sampleframes, updateFps: updateFps)
-        
         try prepareCamera()
     }
     
